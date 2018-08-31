@@ -32,7 +32,7 @@
   :foreach line in=$1 do={
     :local s1 [:find $line ",'"];
     :local s2 [:find $line "'," $s1];
-    :local s3 [:find $line "," $s2];
+    :local s3 [:find $line "," ($s2+1)];
     :local s4 [:find $line "," $s3];
     :local macAddr [:pick $line 0 $s1];
     :local signal [:pick $line ($s3+1) $s4];
