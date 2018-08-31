@@ -1,5 +1,7 @@
 # Main application file for geoMikroTik project.
 # https://github.com/startik/geoMikroTik/
+# Copyright: Daniel Starnowski 2018
+# Shared under the MIT License
 
 # Initialize table for AP list
 :local apList [:toarr ""];
