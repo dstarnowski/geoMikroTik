@@ -75,6 +75,7 @@
   :if ($valid<3) do={
     :return {valid=0};
   } else={
+    :put "Lat: $lat, Lon: $lon, Acc: $acc";
     :return {valid=1;lat="$lat";lon="$lon";acc="$acc"};
   }
 }
@@ -93,7 +94,6 @@
 
 # Prepare and send the Google API JSON request
 :local httpData [$prepareJSON $apList];
-:put $httpData;
 /tool fetch url="https://www.googleapis.com/geolocation/v1/geolocate\?key=$apiKey" http-content-type="application/json" http-method=post http-data="$httpData" dst-path="locationFile.txt";
 :delay 2s;
 
