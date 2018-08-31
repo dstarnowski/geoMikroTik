@@ -109,7 +109,7 @@
   :put "Coordinates found:"
   :put "Latitude: $lat";
   :put "Longitude: $lon";
-  :put "Acuracy: $acc";
+  :put "Accuracy: $acc";
   :put "Direct Google Maps link:";
   :put "https://www.google.com/maps/\?q=$lat,$lon";
 } else={
