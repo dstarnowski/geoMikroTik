@@ -16,7 +16,7 @@
       :set $endFile 1;
     } else={
      :if (($nextNF-$filePosition)>1) do={
-        :set $fileLines ($filelines,[:pick $file $filePosition $nextNF]);
+        :set $fileLines ($fileLines,[:pick $file $filePosition $nextNF]);
       }
       :set $filePosition ($nextNF+1);
     }
@@ -31,7 +31,7 @@
 :foreach wifiInterface in=[/interface wireless find] do={
   :local fileName ("geoMikroTik-" . [/interface wireless get $wifiInterface name] . ".scan");
   /interface wireless scan $wifiInterface duration=10s save-file="$fileName";
-  :delay 1s;
+  :delay 2s;
   :set $apList ($apList,[$splitFileLines $fileName]);
 }
 :foreach line in=$apList do={
