@@ -24,16 +24,40 @@
   :return $fileLines;
 }
 
+# prepareJSON - function creating the JSON request data for Google Geolocation API from the array of wireless scan lines
+# Example: :local http-data [$prepareJSON $fileLinesArray]
+:local prepareJSON do={
+  :local request "{\"wifiAccessPoints\":[";
+  :local firstLine 1;
+  :foreach line in=$1 do={
+    :local s1 [:find $line ",'"];
+    :local s2 [:find $line "'," $s1];
+    :local s3 [:find $line "," $s2];
+    :local s4 [:find $line "," $s3];
+    :local macAddr [:pick $line 0 $s1];
+    :local signal [:pick $line ($s3+1) $s4];
+    :if ($firstLine<1) do={
+      :set $request ($request . ",");
+    } else={
+      :set $firstLine 0;
+    }
+    :set $request ($request . "{\"macAddress\":\"$macAddr\",\"signalStrength\":\"$signal\"}");
+  }
+  :set $request ($request . "]}");
+  :return $request;
+}
+
 # Initialize table for AP list
 :local apList [:toarr ""];
 
-# Run wireless scan on all wireless interfaces
+# Run wireless scan on all wireless interfaces and store results in separate array lines
 :foreach wifiInterface in=[/interface wireless find] do={
   :local fileName ("geoMikroTik-" . [/interface wireless get $wifiInterface name] . ".scan");
   /interface wireless scan $wifiInterface duration=10s save-file="$fileName";
   :delay 2s;
   :set $apList ($apList,[$splitFileLines $fileName]);
+  /file remove $fileName;
 }
-:foreach line in=$apList do={
-  :put "Line: $line";
-}
+# Prepare the Google API JSON request
+:local httpData [$prepareJSON $apList];
+:put $httpData;
