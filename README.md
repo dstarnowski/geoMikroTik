@@ -13,6 +13,7 @@ https://developers.google.com/maps/documentation/geolocation/get-api-key
 ```
 
 Alternatively:
+
 3a. Upload the file to your MikroTik router.
 
 4a. Run the script with:
@@ -21,6 +22,7 @@ Alternatively:
 ```
 
 Or:
+
 3b. Create a script on MikroTik router called "geoMikroTik" and paste the script code.
 
 4b. Run the script with:
