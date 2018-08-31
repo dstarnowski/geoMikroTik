@@ -32,7 +32,7 @@
   :local fileName ("geoMikroTik-" . [/interface wireless get $wifiInterface name] . ".scan");
   /interface wireless scan $wifiInterface duration=10s save-file="$fileName";
   :delay 1s;
-  :set $apList ($apList,[$splitFilelines $fileName]);
+  :set $apList ($apList,[$splitFileLines $fileName]);
 }
 :foreach line in=$apList do={
   :put "Line: $line";
