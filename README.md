@@ -35,7 +35,7 @@ The results should look like:
 Coordinates found:
 Latitude: 56.9378815
 Longitude: 24.0401126
-Accuracy: 40.0
+Accuracy: 40.0 m
 Direct Google Maps link:
 https://www.google.com/maps/?q=56.9378815,24.0401126
 ```
