@@ -59,15 +59,15 @@
   :local lon 0;
   :local acc 0;
   :foreach line in=$1 do={
-    :if ([:find $line "\"lat\":"]!="nil") do={
+    :if ([:typeof [:find $line "\"lat\":"]]!="nil") do={
       :set $valid ($valid+1);
-      :set $lat [:pick $line ([:find $line "\"lat\":"]+7) [:find $line " " ([:find $line "\"lat\":"]+7)]];
+      :set $lat [:pick $line ([:find $line "\"lat\":"]+7) [:find $line "," ([:find $line "\"lat\":"]+7)]];
     }
-    :if ([:find $line "\"lng\":"]!="nil") do={
+    :if ([:typeof [:find $line "\"lng\":"]]!="nil") do={
       :set $valid ($valid+1);
       :set $lon [:pick $line ([:find $line "\"lng\":"]+7) [:len $line]];
     }
-    :if ([:find $line "\"accuracy\":"]!="nil") do={
+    :if ([:typeof [:find $line "\"accuracy\":"]]!="nil") do={
       :set $valid ($valid+1);
       :set $acc [:pick $line ([:find $line "\"accuracy\":"]+12) [:len $line]];
     }
@@ -75,7 +75,6 @@
   :if ($valid<3) do={
     :return {valid=0};
   } else={
-    :put "Lat: $lat, Lon: $lon, Acc: $acc";
     :return {valid=1;lat="$lat";lon="$lon";acc="$acc"};
   }
 }
