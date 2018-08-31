@@ -12,10 +12,10 @@
   :local endFile 0;
   while ($endFile<1) do={
     :local nextNF [:find $file "\n" $filePosition]
-    :if ([:typeof $nexNF]="nil") do={
+    :if ([:typeof $nextNF]="nil") do={
       :set $endFile 1;
     } else={
-      :if (($nextNF-$filePosition)>1) do={
+     :if (($nextNF-$filePosition)>1) do={
         :set $fileLines ($filelines,[:pick $file $filePosition $nextNF]);
       }
       :set $filePosition ($nextNF+1);
