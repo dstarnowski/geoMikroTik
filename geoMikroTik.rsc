@@ -84,9 +84,16 @@
 
 # Run wireless scan on all wireless interfaces and store results in separate array lines
 :foreach wifiInterface in=[/interface wireless find] do={
-  :local fileName ("geoMikroTik-" . [/interface wireless get $wifiInterface name] . ".scan");
+  :local fileName ("geoMikroTikScan-" . [/interface wireless get $wifiInterface name] . ".scan");
   /interface wireless scan $wifiInterface duration=10s save-file="$fileName";
-  :delay 2s;
+}
+
+# Wait for the files to be written
+:delay 2s;
+
+# Fill the AP list from the geoMikroTik.scan files
+:foreach scanfile in=[/file find name~"geoMikroTikScan-"] do={
+  :local fileName [/file get $scanfile name];
   :set $apList ($apList,[$splitFileLines $fileName]);
   /file remove $fileName;
 }
