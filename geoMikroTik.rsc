@@ -52,7 +52,7 @@
 
 # getGoogleLocation - function getting Latitude, Longitude and Accuracy data from the Google Geolocation API response (array of lines)
 # response is in form of array with keys: lat, lon, acc and valid (valid=0 - no position, valid=1 - position found)
-# Example: :if (([$getGoogleLocation $fileLocationArray]->"valid")>0) {:local accuracy [$getGoogleLocation "fileLocation.txt"]->"acc";}
+# Example: :if (([$getGoogleLocation $fileLocationArray]->"valid")>0) {:local accuracy [$getGoogleLocation $fileLocationArray]->"acc";}
 :local getGoogleLocation do={
   :local valid 0;
   :local lat 0;
