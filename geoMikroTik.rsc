@@ -100,7 +100,7 @@
 
 # Prepare and send the Google API JSON request
 :local httpData [$prepareJSON $apList];
-/tool fetch url="https://www.googleapis.com/geolocation/v1/geolocate\?key=$apiKey" http-content-type="application/json" http-method=post http-data="$httpData" dst-path="locationFile.txt";
+/tool fetch url="https://www.googleapis.com/geolocation/v1/geolocate\?key=$apiKey" http-header-field="Content-Type:application/json" http-method=post http-data="$httpData" dst-path="locationFile.txt";
 :delay 2s;
 
 # Parse the results
